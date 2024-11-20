@@ -1,49 +1,49 @@
+from flask import Flask, request, render_template
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
-# Step 1: Read the CSV file
-def read_csv(file_path):
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/upload-csv', methods=['POST'])
+def upload_csv():
+    if 'csvFile' not in request.files:
+        return "No file part", 400
+    
+    file = request.files['csvFile']
+    
+    if file.filename == '':
+        return "No selected file", 400
+    
+    # Save the file temporarily
+    file_path = os.path.join('uploads', file.filename)
+    file.save(file_path)
+
+    # Read the CSV file using pandas
     try:
         data = pd.read_csv(file_path)
-        print("CSV Data Loaded Successfully!")
-        print(data.head())  # Display first few rows
-        return data
-    except FileNotFoundError:
-        print(f"Error: The file at {file_path} was not found.")
-    except pd.errors.EmptyDataError:
-        print("Error: The file is empty.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+        print(data.head())  # Optional: Print the first few rows for debugging
 
-# Step 2: Plot the data
-def visualize_data(data, x_column, y_column):
-    try:
+        # Generate a plot (Example: line plot for the first two columns)
         plt.figure(figsize=(10, 6))
-        plt.plot(data[x_column], data[y_column], marker='o', label=f"{y_column} vs {x_column}")
-        plt.title(f"{y_column} vs {x_column}")
-        plt.xlabel(x_column)
-        plt.ylabel(y_column)
+        plt.plot(data.iloc[:, 0], data.iloc[:, 1], marker='o', label="Data Plot")
+        plt.title("CSV Data Visualization")
+        plt.xlabel(data.columns[0])
+        plt.ylabel(data.columns[1])
         plt.legend()
-        plt.grid()
-        plt.show()
-    except KeyError:
-        print("Error: One of the specified columns does not exist.")
+        
+        # Save the plot as an image
+        plot_path = os.path.join('static', 'plot.png')
+        plt.savefig(plot_path)
+
+        return render_template('index.html', plot_url=plot_path)  # Send the plot URL back to the frontend
+    
     except Exception as e:
-        print(f"An error occurred during visualization: {e}")
+        return f"An error occurred: {e}", 500
 
-# Step 3: Main function to execute the program
-def main():
-    file_path = input("Enter the path to the CSV file: ")
-    data = read_csv(file_path)
-
-    if data is not None:
-        print("\nColumns available for plotting:")
-        print(data.columns)
-        
-        x_column = input("Enter the column name for the X-axis: ")
-        y_column = input("Enter the column name for the Y-axis: ")
-        
-        visualize_data(data, x_column, y_column)
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    app.run(debug=True)
