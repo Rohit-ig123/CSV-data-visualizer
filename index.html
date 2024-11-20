@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Data Visualizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 600px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        input[type="file"], input[type="text"], button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSV Data Visualizer</h1>
+        <p>Use this tool to visualize data from your CSV file. Follow these steps:</p>
+        <ol style="text-align: left;">
+            <li>Prepare your CSV file. Ensure it has proper column headers.</li>
+            <li>Run the Python program to read and visualize your data.</li>
+        </ol>
+        <h2>Upload Your CSV</h2>
+        <p>This front-end is for guidance only. The visualization is done in Python.</p>
+        <input type="file" id="csvFile" />
+        <p>Run the Python script to process and visualize your data.</p>
+        
+        <h3>GitHub Repository</h3>
+        <p>You can find the full project and source code on GitHub:</p>
+        <a href="https://github.com/Rohit-ig123/CSV-data-visualizer.git" target="_blank">View Project on GitHub</a>
+    </div>
+</body>
+</html>
