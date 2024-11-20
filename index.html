@@ -53,26 +53,16 @@
         <p>Use this tool to visualize data from your CSV file. Follow these steps:</p>
         <ol style="text-align: left;">
             <li>Prepare your CSV file. Ensure it has proper column headers.</li>
-            <li>Upload your CSV file and process it with the Python program to visualize your data.</li>
+            <li>Run the Python program to read and visualize your data.</li>
         </ol>
-        <h2>Upload Your CSV</h2>
-        <p>This front-end allows you to upload your CSV file for processing.</p>
+   
+        <p>This front-end is for guidance only. The visualization is done in Python.</p>
+       
+        <p>Run the Python script to process and visualize your data.</p>
         
-        <form action="/upload-csv" method="POST" enctype="multipart/form-data">
-            <input type="file" name="csvFile" id="csvFile" required />
-            <br />
-            <button type="submit">Upload and Visualize</button>
-        </form>
-
         <h3>GitHub Repository</h3>
         <p>You can find the full project and source code on GitHub:</p>
         <a href="https://github.com/Rohit-ig123/CSV-data-visualizer.git" target="_blank">View Project on GitHub</a>
-
-        <!-- Display the plot if it's generated -->
-        {% if plot_url %}
-            <h3>Visualized Data</h3>
-            <img src="{{ plot_url }}" alt="CSV Data Visualization">
-        {% endif %}
     </div>
 </body>
 </html>
